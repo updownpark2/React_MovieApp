@@ -1,6 +1,8 @@
 .btn {
   color: white;
   background-color: tomato;
+  border: 0;
+  margin-right: 10px;
 }
 .title {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
