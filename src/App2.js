@@ -1,48 +1,45 @@
+import { click } from "@testing-library/user-event/dist/click";
 import { useState, useEffect } from "react";
 
-function H3() {
-  return (
-    <div>
-      <h3>Hello!!</h3>
-    </div>
-  );
-}
-
 function App2() {
-  const [todo, setTodo] = useState("");
-  const onChange = (event) => {
-    setTodo(event.target.value);
+  const [todovalue, setTodovalue] = useState("");
+  const change = (event) => {
+    setTodovalue(event.target.value);
   };
   const [todos, setTodos] = useState([]);
-  console.log(todo);
-  const onSubmit = (event) => {
+  const Submit = (event) => {
     event.preventDefault();
-    setTodos((recent) => [todo, ...recent]);
-    //저장해주기 위해 배열을 생성하는것
-    setTodo("");
+    setTodos((recent) => [todovalue, ...recent]);
+    setTodovalue("");
   };
-  console.log(todos);
+  const Click = (event) => {
+    console.dir(event.target.parentElement);
+  };
   return (
     <div>
-      <h1>Hello Sangha!</h1>
-      <form onSubmit={onSubmit}>
+      <h1>Memo🗒</h1>
+      <form onSubmit={Submit}>
         <input
-          onChange={onChange}
-          value={todo}
+          onChange={change}
+          value={todovalue}
           type="text"
           placeholder="What To Do?"
-          style={{
-            padding: "10px 20px",
-            color: "tomato",
-            backgroundColor: "white",
-            border: 0,
-            borderRadius: 10,
-          }}
         />
-        <button style={{ border: 0, backgroundColor: "white" }}>Here!</button>
+        <button>Submit</button>
       </form>
+      <hr />
+      <ul>
+        {todos.map(function (item, index) {
+          return (
+            <li key={index}>
+              {item}
+              <button onClick={Click}>❌</button>
+            </li> //click했을 때 아이템을 뺄 수 있어야한다. todos의 함수에서 setTodovalue를 이용해보자
+          );
+        })}
+      </ul>
     </div>
   );
-}
+} //더생각해봐야겟다
 
 export default App2;
